@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LongLife KH - ផ្សារផលិតផលសុខភាព</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Kantumruy Pro','Outfit',sans-serif;background:#f0f4f0;color:#1a1a2e}
+.hdr{background:linear-gradient(135deg,#0d2b1a,#1a472a,#2d6a4f);position:sticky;top:0;z-index:100;box-shadow:0 3px 20px rgba(0,0,0,.35)}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.logo{display:flex;align-items:center;gap:9px}
+.logo-ic{width:44px;height:44px;background:linear-gradient(135deg,#a8d5a2,#52b788);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.logo-tx .brand{font-size:17px;font-weight:800;font-family:'Outfit',sans-serif;color:#fff;letter-spacing:.8px}
+.logo-tx .sub{font-size:11px;color:rgba(255,255,255,.75)}
+.cnt-badge{background:rgba(168,213,162,.2);border:1px solid rgba(168,213,162,.4);color:#a8d5a2;padding:4px 12px;border-radius:16px;font-size:11px;font-weight:700}
+.nav{display:flex;overflow-x:auto;padding:2px 8px 0;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nb{color:rgba(255,255,255,.7);background:none;border:none;padding:9px 14px;font-size:12px;cursor:pointer;white-space:nowrap;font-family:inherit;border-bottom:2px solid transparent;transition:all .2s;font-weight:500}
+.nb:hover,.nb.active{color:#fff;border-bottom-color:#a8d5a2}
+.hero{background:linear-gradient(160deg,#0d2b1a,#1a472a,#2d6a4f);padding:28px 16px 36px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:30px;background:#f0f4f0;clip-path:ellipse(55% 100% at 50% 100%)}
+.hero h1{font-size:24px;font-weight:800;margin-bottom:7px;font-family:'Outfit',sans-serif;line-height:1.3}
+.hero p{font-size:13px;opacity:.85;margin-bottom:14px}
+.hbadges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.hbadge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;padding:5px 12px;border-radius:18px;font-size:11px;font-weight:500}
+.swrap{padding:0 16px;position:relative;top:-14px;margin-bottom:-4px}
+.sbar{background:#fff;border-radius:14px;display:flex;align-items:center;padding:0 16px;box-shadow:0 4px 18px rgba(0,0,0,.11);border:1.5px solid #e8f5e9}
+.sbar input{flex:1;border:none;outline:none;padding:14px 10px;font-size:14px;font-family:inherit;color:#1a1a2e;background:transparent}
+.sbar input::placeholder{color:#aaa}
+.sec{padding:0 14px 28px}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sec-t{font-size:15px;font-weight:700;color:#1a1a2e;display:flex;align-items:center;gap:6px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+@media(max-width:480px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+.pcard{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.07);cursor:pointer;transition:transform .2s,box-shadow .2s;border:1px solid #f0f0f0;position:relative}
+.pcard:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.13)}
+.pimg{width:100%;height:130px;display:flex;align-items:center;justify-content:center;font-size:38px;background:linear-gradient(135deg,#f0f9f4,#e0f3ea)}
+.pbody{padding:10px 11px 12px}
+.pbrand{font-size:9px;color:#2d6a4f;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.pname{font-size:12.5px;font-weight:600;color:#1a1a2e;line-height:1.4;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:35px}
+.pdesc{font-size:11px;color:#777;line-height:1.5;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pfoot{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.pprice{font-size:17px;font-weight:800;color:#c62828;line-height:1}
+.bbtn{background:linear-gradient(135deg,#1a472a,#2d6a4f);color:#fff;border:none;padding:7px 11px;border-radius:9px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600;transition:opacity .2s;white-space:nowrap;flex-shrink:0}
+.bbtn:hover{opacity:.85}
+.otag{position:absolute;top:8px;left:8px;background:rgba(26,71,42,.85);color:#fff;font-size:9px;font-weight:700;padding:3px 7px;border-radius:8px}
+.ntag{position:absolute;top:8px;right:8px;background:#e53935;color:#fff;font-size:9px;font-weight:700;padding:3px 7px;border-radius:8px}
+/* Modal */
+.mo{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.65);z-index:1000;display:none;align-items:flex-end;justify-content:center}
+.mo.open{display:flex}
+.mpanel{background:#fff;border-radius:22px 22px 0 0;width:100%;max-width:600px;max-height:92vh;overflow-y:auto;padding:20px 18px 30px}
+.mhandle{width:36px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 14px}
+.mph{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+.mic{width:72px;height:72px;border-radius:14px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0}
+.mpi h2{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px;line-height:1.4}
+.mpi .mbr{font-size:10px;color:#2d6a4f;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.mpi .mpr{font-size:24px;font-weight:800;color:#c62828}
+.mdb{background:linear-gradient(135deg,#f0f9f4,#e8f5e9);border:1px solid #c8e6c9;border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.mdb h3{font-size:11px;font-weight:700;color:#1a472a;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.mdb p{font-size:13px;color:#333;line-height:1.7}
+.ftitle{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.fg{margin-bottom:11px}
+.fg label{display:block;font-size:11px;font-weight:700;color:#444;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
+.fg input,.fg textarea{width:100%;padding:11px 14px;border:1.5px solid #e0e0e0;border-radius:10px;font-size:14px;font-family:inherit;color:#1a1a2e;background:#fff;transition:border-color .2s;outline:none}
+.fg input:focus,.fg textarea:focus{border-color:#2d6a4f;background:#fafff9}
+.fg textarea{resize:vertical;min-height:70px}
+.qrow{display:flex;align-items:center;gap:14px}
+.qbtn{width:38px;height:38px;background:#f0f4f0;border:1.5px solid #ddd;border-radius:10px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;color:#1a472a}
+.qbtn:hover{background:#c8e6c9}
+.qnum{font-size:20px;font-weight:800;min-width:30px;text-align:center}
+.tbox{background:linear-gradient(135deg,#fff3e0,#ffe0b2);border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+.tbox .tlbl{font-size:14px;color:#555;font-weight:600}
+.tbox .tamt{font-size:24px;font-weight:800;color:#c62828}
+.sbtn{width:100%;background:linear-gradient(135deg,#0d2b1a,#2d6a4f);color:#fff;border:none;padding:16px;border-radius:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 16px rgba(45,106,79,.4)}
+.sbtn:hover{opacity:.9}
+.tginfo{background:#e3f2fd;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#0d47a1;display:flex;gap:8px;align-items:flex-start;line-height:1.6}
+/* Success */
+.sov{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.75);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
+.sov.open{display:flex}
+.sbox{background:#fff;border-radius:20px;padding:30px 24px;text-align:center;max-width:340px;width:100%}
+.sbox .sic{font-size:64px;margin-bottom:10px}
+.sbox h2{font-size:20px;font-weight:800;color:#1a472a;margin-bottom:8px}
+.sbox p{font-size:13px;color:#555;line-height:1.7;margin-bottom:16px}
+.scls{background:linear-gradient(135deg,#1a472a,#2d6a4f);color:#fff;border:none;padding:13px 32px;border-radius:12px;font-size:15px;cursor:pointer;font-family:inherit;font-weight:700}
+/* Footer */
+.ftr{background:linear-gradient(135deg,#0d2b1a,#1a2e1a);color:#fff;padding:28px 20px 22px}
+.flr{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.flogo{width:46px;height:46px;background:linear-gradient(135deg,#a8d5a2,#52b788);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px}
+.fbn{font-size:17px;font-weight:800;font-family:'Outfit',sans-serif}
+.fbt{font-size:11px;color:rgba(255,255,255,.6)}
+.fdiv{height:1px;background:rgba(255,255,255,.1);margin:14px 0}
+.fsh4{font-size:11px;font-weight:700;color:#a8d5a2;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.fi{display:flex;align-items:flex-start;gap:10px;margin-bottom:9px;font-size:13px;color:rgba(255,255,255,.8);line-height:1.5}
+.fic{font-size:15px;width:18px;text-align:center;flex-shrink:0;margin-top:1px}
+.fcp{text-align:center;font-size:11px;color:rgba(255,255,255,.35);margin-top:14px}
+.nores{text-align:center;padding:40px 16px;color:#999;font-size:14px}
+.hidden{display:none!important}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px}
+</style>
+</head>
+<body>
+ 
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="logo">
+      <div class="logo-ic">🌿</div>
+      <div class="logo-tx">
+        <div class="brand">LONGLIFE KH</div>
+        <div class="sub">តេងស៊ាងអ៊ីផលិតផលសុខភាព 🇺🇸</div>
+      </div>
+    </div>
+    <div class="cnt-badge">57 ផលិតផល</div>
+  </div>
+  <div class="nav">
+    <button class="nb active" onclick="fc('all',this)">ទាំងអស់ (57)</button>
+    <button class="nb" onclick="fc('vitamin',this)">🧪 វីតាមីន</button>
+    <button class="nb" onclick="fc('pain',this)">💊 ឈឺចាប់</button>
+    <button class="nb" onclick="fc('skin',this)">✨ ស្បែក/មុខ</button>
+    <button class="nb" onclick="fc('tea',this)">🍵 តែ/ភេសជ្ជៈ</button>
+    <button class="nb" onclick="fc('dental',this)">🦷 ធ្មេញ</button>
+    <button class="nb" onclick="fc('wellness',this)">💚 សុខភាព</button>
+    <button class="nb" onclick="fc('fitness',this)">🏋️ ហាត់ប្រាណ</button>
+  </div>
+</div>
+ 
+<!-- HERO -->
+<div class="hero">
+  <h1>តេងស៊ាងអ៊ី ផលិតផលសុខភាព<br>នាំចូលពី USA 🇺🇸</h1>
+  <p>ផលិតផលពិតប្រាកដ · 57 មុខ · ដឹកជញ្ជូនដល់ដៃ</p>
+  <div class="hbadges">
+    <div class="hbadge">🇺🇸 Imported from USA</div>
+    <div class="hbadge">🚚 ដឹកដល់ដៃ</div>
+    <div class="hbadge">✅ ទំនុកចិត្ត 100%</div>
+    <div class="hbadge">📦 57 ផលិតផល</div>
+  </div>
+</div>
+ 
+<!-- SEARCH -->
+<div class="swrap">
+  <div class="sbar">
+    <span style="color:#2d6a4f;font-size:18px;margin-right:4px">🔍</span>
+    <input type="text" placeholder="ស្វែងរក... (ខ្មែរ ឬ English)" id="si" oninput="ds()" />
+  </div>
+</div>
+ 
+<!-- PRODUCTS -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-t">🛒 ផលិតផលទាំងអស់ <span id="cl" style="font-size:12px;color:#888;font-weight:400;margin-left:4px">(57)</span></div>
+  </div>
+  <div class="pgrid" id="pg"></div>
+  <div id="nr" class="nores hidden">😔 រកមិនឃើញផលិតផល... សូមបញ្ចូលឈ្មោះផ្សេង</div>
+</div>
+ 
+<!-- FOOTER -->
+<div class="ftr">
+  <div class="flr">
+    <div class="flogo">🌿</div>
+    <div>
+      <div class="fbn">LONGLIFE KH</div>
+      <div class="fbt">តេងស៊ាងអ៊ីផលិតផលសុខភាព</div>
+    </div>
+  </div>
+  <div class="fdiv"></div>
+  <div>
+    <div class="fsh4">ទំនាក់ទំនង</div>
+    <div class="fi"><span class="fic">📍</span><span>#16, St.07 Borey Piphoub Thmey Phsar Chhouk Meas, Krang Thnung, Sen Sok, Phnom Penh</span></div>
+    <div class="fi"><span class="fic">📞</span><span>016 499 964</span></div>
+    <div class="fi"><span class="fic">✈️</span><span>Telegram: @challizz</span></div>
+  </div>
+  <div class="fdiv"></div>
+  <div class="fcp">© 2025 LongLife KH · ផលិតផលទាំងអស់ នាំចូលផ្លូវការ 🇺🇸</div>
+</div>
+ 
+<!-- ORDER MODAL -->
+<div class="mo" id="mo" onclick="cmo(event)">
+  <div class="mpanel">
+    <div class="mhandle"></div>
+    <div class="mph">
+      <div class="mic" id="mic">🌿</div>
+      <div class="mpi">
+        <div class="mbr" id="mbr"></div>
+        <h2 id="mn"></h2>
+        <div class="mpr" id="mp"></div>
+      </div>
+    </div>
+    <div class="mdb">
+      <h3>📋 ព័ត៌មានផលិតផល</h3>
+      <p id="md"></p>
+    </div>
+    <div class="tginfo">
+      <span>ℹ️</span>
+      <span>បន្ទាប់ពីបំពេញព័ត៌មាន ភ្នាក់ងារ LongLife KH នឹងទូរស័ព្ទ មកកាន់លោក/អ្នក ហើយ ដឹកជញ្ជូនផ្ញើផលិតផលដល់ដៃ</span>
+    </div>
+    <div class="ftitle">📝 ចុះបញ្ជីទទួលផលិតផល</div>
+    <div class="fg"><label>ឈ្មោះពេញ *</label><input type="text" id="fn" placeholder="សូមបញ្ចូលឈ្មោះ" /></div>
+    <div class="fg"><label>លេខទូរស័ព្ទ *</label><input type="tel" id="fp" placeholder="0xx xxx xxx" /></div>
+    <div class="fg"><label>អាសយដ្ឋាន *</label><textarea id="fa" placeholder="ភូមិ / សង្កាត់ / ខណ្ឌ / ខេត្ត..."></textarea></div>
+    <div class="fg">
+      <label>ចំនួន</label>
+      <div class="qrow">
+        <button class="qbtn" onclick="cq(-1)">−</button>
+        <span class="qnum" id="qn">1</span>
+        <button class="qbtn" onclick="cq(1)">+</button>
+      </div>
+    </div>
+    <div class="fg"><label>កំណត់ចំណាំ</label><textarea id="fnt" placeholder="សំណួរ ឬ ចង់ដឹងបន្ថែម..."></textarea></div>
+    <div class="tbox">
+      <span class="tlbl">💰 សរុបទាំងអស់</span>
+      <span class="tamt" id="ta">$0</span>
+    </div>
+    <button class="sbtn" onclick="so()">
+      <span>📨</span> ផ្ញើការបញ្ជាទិញតាម Telegram
+    </button>
+  </div>
+</div>
+ 
+<!-- SUCCESS MODAL -->
+<div class="sov" id="sov">
+  <div class="sbox">
+    <div class="sic">🎉</div>
+    <h2>ការបញ្ជាទិញបានផ្ញើ!</h2>
+    <p>សូមអរគុណ! ភ្នាក់ងារ LongLife KH នឹងទូរស័ព្ទ មកកាន់លោក/អ្នក ក្នុងពេលឆាប់ ហើយ ដឹកជញ្ជូនផ្ញើដល់ដៃ។</p>
+    <button class="scls" onclick="cs()">យល់ព្រម ✓</button>
+  </div>
+</div>
+ 
+<script>
+const P=[
+  {id:1,name:"Yogi Stress+Sleep Tea",brand:"Yogi",e:"🍵",price:28,cat:"tea",desc:"Yogi
+Cinnamon Horchata​ Stress+SleepTM,SUPPORTS STRESS RESPONSE AND RESTFUL SLEEP*,CAFFEINE FREE,HERBAL SUPPLEMENT,NON GMO,USDA,Project,ORGANIC VERIFIED 16 TEA BAGS NET WT 1.12 OZ/32g nongmoproject.org
+តែផឹកUSA ជួយសម្រាប់ អ្នក ស្ត្រេស នឹង ពិបាកគេង 28$ មួយថ្ងៃញាំ 1 កញ្ចប់ឆុង ជាមួយទឹកក្តៅ មាន16 កញ្ចប់",n:false,"image":"https://ibb.co/7JYPJ6KW"},
+  {id:2,name:"Children's Ibuprofen 100mg",brand:"Equate",e:"💊",price:18,cat:"pain",desc:"equateTM
+FOR AGES 2 to 11 YEARS,children's IBUPROFEN,Chewable Tablets, 100 mg,Pain Reliever/Fever Reducer (NSAID)
+Chewables Grape Flavor,Chew or crush tablets,completely before swallowing,NDC 49035-521-62,Compare to Children's MotrinR active ingredient LASTS UP TO 8 HOURS 24 CHEWABLE TABLETS
+ថ្នាំក្តៅខ្លួន រងារ ឈឺក្បាល ធ្មេញសំរាប់ក្មេងអាយុ 2ឆ្នាំទៅ11ឆ្នាំ $18 មាន24គ្រាប់ទំពារ ញាំ1 គ្រាប់រាល់8ម៉ោង ម្តង មិនឲ្យញាំលើស4គ្រាប់ ក្នុង1ថ្ងៃទេ",n:false,"image":"https://ibb.co/ccy7nxzT"},
+  {id:3,name:"Nicotine Lozenges 4mg",brand:"Equate",e:"🚭",price:28,cat:"wellness",desc:"equate
+NDC 79905-182-20,Compare to Nicorette® Lozenge active ingredient,COATED
+Nicotine Lozenges,Nicotine Polacrilex,Lozenge, 4 mg(Nicotine) 4 Stop Smoking Aid
+Sugar-Free Includes User's Guide FOR THOSE WHO SMOKE THEIR FIRST CIGARETTE WITHIN 30 MINUTES
+OF WAKING UP.If you smoke your first cigarette MORE THAN 30 MINUTES after waking up, use Nicotine Polacrilex Lozenge, 2 mg ICE MINT FLAVOR 20 LOZENGES,Actual Size
+ថ្នាំជួយឈប់ជក់បារី USA $28 កាលវិភាគញាំផ្តាច់ជក់បារី អាទិត្យដំបូងបៀម1 គ្រាប់រៀងរាល់2ម៉ោងម្តង អាទិត្យទី 6ទៅ បៀម1 គ្រាប់រៀងរាល់4 ម៉ោងម្តង អាទិត្យទី10ទៅ12 បៀម1 គ្រាប់រាល់8ម៉ោងម្តង ហាមញាំអ្វីមុន15 នាទី ចាប់ផ្តើមដាក់បៀមមិនទំពៀទេ ហាមញាំលើស20 គ្រាប់ក្នុង1 ថ្ងៃ ហាមលើស5 គ្រាប់ក្នុងរយះពេល6 ម៉ោង ញាំ ៣ ខែ ស្មើ12 អាទិត្យ",n:false,"image":"https://ibb.co/wNFWxMZY"},
+  {id:4,name:"Butenafine HCL Cream 1%",brand:"Equate",e:"🧴",price:29,cat:"skin",desc:"NDC 49035-178-08
+Compare to Lotrimin Ultra Jock Itch Active Ingredient,CONTAINS THE DRUG: BUTENAFINE HYDROCHLORIDE,Butenafine Hydrochloride Cream 1%,Antifungal,Clinically Proven To Cure Most Jock Itch
+• Prescription Strength
+• Relieves Itching,Burning and Chafing NET WT 0.42 OZ (12 g) $29
+ថ្នាំជួយបំបាត់,រមាស់,ប្រេះក្រហែង,ដៃជើង,រលាក់ស្នាម..USA,ប្រើសំរាប់តែអ្នកមាន បញ្ហាចាប់ពីអាយុ12ឆ្នាំឡើង",n:false,"image":"https://ibb.co/0SKWhZ0"},
+  {id:5,name:"Ashwagandha 3,000mg",brand:"Nature's Truth",e:"🌿",price:39,cat:"wellness",desc:"NATURE'S TRUTH EXTRA STRENGTH ASHWAGANDHA 3,000 mg EQUIVALENT** PER SERVING NON-GMO GLUTEN FREE 90 QUICK RELEASE
+CAPSULES HERBAL SUPPLEMENT USA $39 ថ្នាំជួយបំបាត់ស្ត្រេស គេង មិនលក់ ធុញថប់ ជួយខួក្បាល ជួយកម្លាំង ជួយបុរសអសមត្ថភាព ចង់បន្តពូជ ជម្ងឺរលាក់សន្លាក់នឹងគ្រប់គ្រងស្កក្នុងឈាម ញាំ1ថ្ងៃ2គ្រាប់ពេលបាយ ហើយចាប់ពីអាយុ18 ឆ្នាំឡើងមាន១០គ្រាប់",n:false,"image":"https://ibb.co/yFLS8Ph1"},
+  {id:6,name:"Score XXL Male Enhancement",brand:"Force Factor",e:"💪",price:36,cat:"wellness",desc:"FORCE FACTOR- MALE ENHANCEMENT,ថ្នាំជំនួយផ្លូវភេ.ទ បុរសឲ្យខ្លាំ.ងរឹងយូរ USA $36 ញាំ1ថ្ងៃ3គ្រាប់បាយហើយ SCORE!ឬមុន30នាទីមុនសកម្មភាព WORKS TONIGHT! GO LONGER XXL STIMULATE AROUSAL MAXIMIZE PLEASURE & FUN' 2.3X INCREASE amic side 30 TABLETS DIETARY SUPPLEMENT",n:false,"image":"https://ibb.co/zVRnMvV1"},
+  {id:7,name:"Orasol Oral Anesthetic Gel 20%",brand:"Equate",e:"🦷",price:22,cat:"dental",desc:"ថ្នាំបាត់ឈឺធ្មេញ ឈឺ អញ្ញាញ តំបៅរលួយ 22$ Instant Pain Relief
+• Toothaches
+• Gum pain Canker sores Denture pain Andesor" Ger Active Ingredient: Maximum Strength Orasol Benzocaine 20% Oral Anesth NET WT equate® Compars to Maximum Strength Anbesal Gel Active Ingredient Maximum Strength Orasol Benzocaine 20% Oral Anesthetic Gel Instant Pain Relief NET WT O.33 OZ (935 g) លាបពីលើ 4ដង នៅកន្លែង ឈឺ ប្រើបាន ទាំងក្មេងចាស់ ចាប់2ឆ្នាំឡើង",n:false,"image":"https://ibb.co/9kNFsb6H"},
+  {id:8,name:"Tylenol Extra Strength 500mg",brand:"Tylenol",e:"💊",price:18,cat:"pain",desc:"USA
+Purpose TO OPEN: PUSH AND TURN CAP NDC 50580-378-04 DO NOT USE WITH OTHER MEDICINES CONTAINING ACETAMINOPHEN TYLENOL FOR ADULTS Acetaminophen Pain Reliever-Fever Reducer fasin Extra Strengthឮ you
+24 Caplets with TEREY HITHE Darbad តម្លៃ18$ បាត់ឈឺក្បាល,ធ្មេញ,ឈឺសន្លាក់ ដៃជើង,ក្តៅខ្លួន,គ្រុនរងា មាន24គ្រាប់ អាយុចាប់ពី12 ឆ្នាំឡើងអាច ញាំម្តង1គ្រាប់ 6 ម៉ោងម្តង NDC 50580-378-04 TYLENOL Pain Reliever Fever Reducer
+Acetaminophen Extra Strength FOR ADULTS TYLENOL 24 Caplets 500 mg",n:false,"image":"https://ibb.co/hJx8ntt5"},
+  {id:9,name:"Revitaderm Psoriasis Formula",brand:"Dr. Blaine's",e:"🧴",price:39,cat:"skin",desc:"VITADERM PSORIASIS ORMULA TRAVEL SHE Dr. Blaine's
+NDC 63347-112-01 PREMIUM SKIN CARE PRODUCTS REVITADERM® PSORIASIS FORMULA BONUS! TRAVEL SIZE
+| INCLUDED!ថ្នាំព្យាបាល ជំងឺស្បែករមាស់ រលាកស្បែក របកក្រហម REVITADERM® PSORIASIS FORMULA USA $39
+លាប1 ដងទៅ4ដងលើកន្លែងរមាស់ ក្រហម រលាក ក្មេងក្រោមអាយុ2ឆ្នាំ សាកសួរវិជ្ជបណ្ឌិតសិន",n:false,"image":"https://ibb.co/5g4S0h58"},
+  {id:10,name:"Acne Treatment Gel 10%",brand:"Equate Beauty",e:"✨",price:30,cat:"skin",desc:"equateTM beauty Compare to Clean & Clear® Persa-Gel® 10* ACNE TREATMENT GEL Benzoyl Peroxide 10% TREAT Maximum strength acne medication without a prescription ថ្នាំព្យាបាល មុន USA 30$ មុនប្រើលាងមុខ ឲ្យស្អាតរួចច្របាច់ លាបលើមុនមួយ ថ្ងៃមួយដងឬ2ដងបាន តែបើប្រើទៅធ្វើឲ្យស្ងួត កាត់បន្ថយប្រើ១ថ្ងៃម្ដង វិញ។ PARABEN FREE ALCOHOL",n:false,"image":"https://ibb.co/9myS2JDm"},
+  {id:11,name:"Hemorrhoidal Cream + Aloe",brand:"Equate",e:"🧴",price:20,cat:"wellness",desc:"equateTM
+Compare to Preparation HB Cream active ingredients
+MAXIMUM STRENGTH
+Hemorrhoidal Cream
+Smooth Cream
+Formula with Aloe
+• Rapid soothing pain relief from painful burning, itching and discomfort
+Shrinks swollen hemorrhoidal tissue
+• Protects irritated tissue
+• Relieves external discomfort
+NET WT 1.8 OZ (51g)
+ថ្នាំលាប ឫសដូងបាត USA $20
+ប្រើ ៤ ដងក្នុងមួយថ្ងៃ ពេលព្រឹក, ពេលយប់មុនចូលគេង និងបន្ទាប់ពីបន្ទោបង់រួចរាល់។
+លាងសម្អាតដៃ៖ ត្រូវលាងដៃជាមួយសាប៊ូឱ្យបានស្អាតមុនពេល ប្រើ។
+• សម្អាតតំបន់ដែលត្រូវលាប៖ លាងសម្អាតតំបន់រន្ធគូថថ្នមៗ ជាមួយទឹកឧណ្ហៗ និងសាប៊ូដែលមិនមានជាតិកាត់ខ្លាំង រួចផ្ដិតឱ្យស្ងួតដោយប្រើកន្សែងទន់ ឬក្រដាសអនាម័យ។ ការប្រើខាងក្រៅ៖ ច្របាច់គ្រីមក្នុងបរិមាណសមល្មម រួចលាបលើតំបន់ដែលឈឺ ឬហើម
+ប្រសិនបើមានការធ្លាក់ឈាម ឬរោគសញ្ញាមិនធូរស្រាលក្នុងរយៈពេល ៧ ថ្ងៃ សូមឈប់ប្រើ ហើយទៅពិគ្រោះជាមួយគ្រូពេទ្យ។ • ទុកឱ្យឆ្ងាយពីដៃក្មេង។",n:false,"image":"https://ibb.co/hxq0K75j"},
+  {id:12,name:"Ketone Fat Burner",brand:"Real Ketones",e:"🔥",price:39,cat:"wellness",desc:"REAL KETONES
+KETONE FAT BURNER goBHB Ketones plus Caffeine
+Works with KETO & Other Diets
+DIETARY SUPPLEMENT 60 CAPSULES
+ថ្នាំសម្រកទម្ងន់ ដុតជាតិខ្លាញ់
+USA $39
+មាន60គ្រាប់ ញាំ1ថ្ងៃ2គ្រាប់ ពេលបាយហើយចាប់ពី អាយុ18ឆ្នាំឡើង។អ្នកមានផ្ទៃ ពោះត្រូវពិភាក្សាវេជ្ជបណ្ឌិតសិន",n:false,"image":"https://ibb.co/SwvfYVN6"},
+  {id:13,name:"DenTek 2-in-1 Dental Repair Kit",brand:"DenTek",e:"🦷",price:22,cat:"dental",desc:"ថ្នាំជួយបំពេញបណ្ដោះអាសន្នធ្មេញបែក ប្រេះ $22 បំពេញទុកបានតែ48ម៉ោងចាប់ពីអាយុ13ឆ្នាំឡើង NEW LO SAME PRODUCT SPECIALIZED CARE DenTek DenTek Advanced Repair Kit Temporarily Repairs Caps, Fillings & Crowns Instant Pain Relief DenTek PARIN MAX ANCED REPAIR KIT Repair for Caps & F Wt. 2.64 g (0.09) o TEMPARIN MAX 2-in-1 Repair & Relief Kit 2-in-1 Repair & Relief Kit 13+ REPAIRS NET WT. 0.09or (2.64 g)",n:false,"image":"https://ibb.co/jPLKLkJJ"},
+  {id:14,name:"Allergy Relief Cetirizine 10mg",brand:"Equate",e:"💊",price:18,cat:"wellness",desc:"តម្លៃ18$ផ្តាស់សាយ ហ៊ាសំបោរមិនឈប់ ហ៊ាទឹកភ្នែក equateTM រមាស់ករ Allergy ផលិតផល USA «smu Allergy Relief Cetirizine Hydrochloride Tablets, 10 mg Antihistamine Indoor and Outdoor Allergies 24 Hour Relief of:
+• Sneezing
+• Runny nose
+⚫ Itchy, watery eyes
+• Itchy throat or nose
+មាន14 គ្រាប់ អាយុចាប់ពី6ឆ្នាំ ឡើងអាចញាំបាន Compare to Zyrtec® Active Ingredient 1គ្រាប់ក្នុងរយះពេល 24ម៉ោងម្តង
+24 HOUR SYMPTOM RELIEF 123 Anywhere St., Any , City, ST 12345 10 14 Original Prescription Strength​ mg
+TABLETS Actual Size",n:false,"image":"https://ibb.co/zHWDkfPK"},
+  {id:15,name:"Turmeric 1,000mg",brand:"Nature's Bounty",e:"🌿",price:34,cat:"vitamin",desc:"វីតាមីនTurmeric $34 ជួយព្យាបាលរលាកក្រពះ NATURE'S BOUNTY. ពោះវៀន ជួយបេះដូង Turmeric | ជួយឆ្អឹងសន្លាក់ដៃជើង 1000mg With Turmeric Extract 100mg Standardized for 95% Curcuminoids Plus Black Pepper Extract Contains Antioxidant Power*HERBAL HEALTH 60 Capsules HERBAL SUPPLEMENT ជួយខួរក្បាល មាន60 គ្រាប់ញាំមួយថ្ងៃ 1 គ្រាប់ពេលបាយហើយ ចាប់ពី18ឆ្នាំឡើង",n:false,"image":"https://ibb.co/gb0cP1mZ"},
+  {id:16,name:"Calcium 600mg + Vitamin D",brand:"Spring Valley",e:"🦴",price:39,cat:"vitamin",desc:"THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FOOD AND DRUG ADMINISTRATION. THIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE SPRING VALLEY.Calcium 600 mg PER TABLET Plus Vitamin D 20 mcg DIETARY SUPPLEMENT BONE HEALTH* Calcium and Vitamin D are essential nutrients for strong bones and teeth."100 COATED TABLETS វីតាមីនCALCIUM ជួយ សុខភាពឆ្អឹង សន្លាក់ដៃជើង USA $39 ជួយសុខភាពឆ្អឹង មាន100 គ្រាប់ញាំមួយ ថ្ងៃ1 គ្រាប់ពេលបាយហើយ",n:false,"image":"https://ibb.co/n88TcpSw"},
+  {id:17,name:"Maca 500mg",brand:"Spring Valley",e:"🌱",price:39,cat:"vitamin",desc:"THESE
+STATEMENTS HAVE NOT BEEN AVE, TREAT, CURE OR PREVENT ANY DISEASE THIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT SPRING VALLEY.Maca 500 mg PER CAPSULE DIETARY SUPPLEMENT GENERAL WELLNESS* Supports overall nutrition. For support of male and female hormonal function.* NON GMO Project VERIFIED
+nongmoprojec 90 VEGETARIAN CAPSULES វីតាមីនMaca ជួយសុខភាព ទូទៅទាំងស្រ្តី នឹង បុរស USA $39 ជួយស្រ្តី រដូវ មិនទៀងទាត់ប្រែ ប្រួលឬជួយអារម្មណ៏មិនល្អ ជួយបុរស សំរាប់បង្កើនទឹកកាម មានគុណភាពខ្ពស់ មាន90គ្រាប់ញាំមួយថ្ងៃ
+1គ្រាប់ពេលបាយហើយ",n:false,"image":"https://ibb.co/xSdxPR66"},
+  {id:18,name:"Chromium 1,000mcg",brand:"Spring Valley",e:"💊",price:39,cat:"vitamin",desc:"SPRING VALLEY. Supp Seni Anou Cron CHROM PER TABLET Chromium 1,000 mcg DIETARY SUPPLEMENT METABOLISM SUPPORT*
+Chromium supports healthy metabolism of carbohydrates,proteins and fats."NON GMO Project VERIFIED nongmoproject.org PRODIC វីតាមីនChromium ជួយគ្រប់គ្រងជាតិស្ករក្នុងឈាម USA $39 ជួយសុខភាពបេះដូង និងការគ្រប់គ្រង ស្ថានភាពជំងឺដូចជាជំងឺទឹកនោមផែ្អមប្រភេទទី២ ជាដើម។ មាន100 គ្រាប់ញាំមួយ ថ្ងៃ1 គ្រាប់ពេលបាយហើយ
+THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FOOD AND DRUG ADMINISTRATION. THIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE.
+100 TABLETS",n:false,"image":"https://ibb.co/wtgMtTF"},
+  {id:19,name:"Vitamin D3 1000IU (25mcg)",brand:"Nature Made",e:"☀️",price:34,cat:"vitamin",desc:"VITAMINE PHARMACIST RECOMMENDED SUPPLE USP Nature Made D3
+1000 IU (25 mcg) Supports immune health EVERYDAY VALUE Supports bone, teeth and muscle health
+Dietary Supplement វីតាមីនD3 1000IU(25mcg) ជួយឆ្អឹង សាច់ដុំ USA $34 មាន210 គ្រាប់ ញាំ 1 ថ្ងៃ 1 គ្រាប់ពេល
+បាយហើយ",n:false,"image":"https://ibb.co/whTHCxD6"},
+  {id:20,name:"Nicotine Lozenges 4mg (Extra Pack)",brand:"Equate",e:"🚭",price:28,cat:"wellness",desc:"equate NDC 79903-182-20 Compare to Nicorette® Lozenge active ingredient COATED Nicotine Lozenges Nicotine Polacrilex Lozenge, 4 mg(Nicotine) 4 Stop Smoking Aid Sugar-Free.Includes User's Guide FOR THOSE WHO SMOKE THEIR FIRST CIGARETTE WITHIN 30 MINUTES
+OF WAKING UP.If you smoke your first cigarette MORE THAN 30 MINUTES after waking up, use Nicotine Polacrilex Lozenge, 2 mg ICE MINT FLAVOR 20 LOZENGES Actual Size ថ្នាំជួយឈប់ជក់បារី USA $28 កាលវិភាគញាំផ្តាច់ជក់បារី អាទិត្យតំបូងបៀម1 គ្រាប់រៀងរាល់2ម៉ោងម្តង អាទិត្យទី 6ទៅ បៀម1 គ្រាប់រៀងរាល់4 ម៉ោងម្តង អាទិត្យទី10ទៅ12 បៀម1 គ្រាប់រាល់8ម៉ោងម្តង ហាមញាំអ្វីមុន15 នាទី ចាប់ផ្តើមដាក់បៀមមិនទំពៀទេ ហាមញាំលើស20 គ្រាប់ក្នុង1 ថ្ងៃ ហាមលើស5 គ្រាប់ក្នុងរយះពេល6 ម៉ោង ញាំ ៣ ខែ ស្មើ12 អាទិត្យ",n:false,"image":"https://ibb.co/BKYg9csS"},
+  {id:21,name:"Biotin 5,000mcg",brand:"Spring Valley",e:"💅",price:32,cat:"vitamin",desc:"SPRING VALLEY.
+Biotin PER 5,000 mcg SOFTGEL DIETARY SUPPLEMENT HAIR/SKIN/NAIL HEALTH* Supports energy metabolism and healthy hair, skin, and nails"វីតាមីនជំនួយស្បែក សក់ ក្រចក ឲ្យស្អាត USA $32 មាន120គ្រាប់ ញាំមួយថ្ងៃ1គ្រាប់ ពេលបាយហើយ មុនពេលចូលគេង
+THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FOOD AND DRUG ADMINISTRATION. THIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE.
+120 SOFTGELS 5,000mcg",n:true,"image":"https://ibb.co/4ZLQFTkq"},
+  {id:22,name:"Bling-Bling Toothpaste",brand:"Bling-Bling",e:"✨",price:15,cat:"dental",desc:"Bling-Bling Toothpaste ឈាមអញ្ចាញ ធ្មេញលឿនដង្កូវស៊ីធ្មេញមាត់មានក្លិនមិនល្អ ការពារធ្មេញរបស់លោកអ្នកអោយរឹងមាំ ការពារដង្កូវស៊ីញ& ធ្វើអោយឈ្មួញ
+NATURAL PURE WHITENING BLING-BLING TOOTHPASTE INE FLAVOR Jee Yurt NATURAL PURE WHITENING BLING-BLING
+TOOTHPASTE 1.76 oz/50g ១កំប៉ុង BLING-BLING TOOTHPASTE ២កំប៉ុង BLING-BLING BLING-BLING TOOTHPASTE TOOTHPASTE
+តាតា ៤កំប៉ុង 15$ សេវាដឹកជញ្ជូន2$ 26$ ហ្វីដឹកជញ្ជូន 66483 BLING-E BLING-BLING LING-BLING BLING TOOTHP TOOTHPASTE OOTHPASTE PASTE ប្រ៊ីដឹកជញ្ជូន 1.76 oz / 50g LIME FLAVOR 24 BLIN BLING TOOT PASTE",n:true,"image":"https://ibb.co/zTBcpvqM"},
+  {id:23,name:"Butenafine Cream Jock Itch",brand:"Equate",e:"🧴",price:29,cat:"skin",desc:"NDC​ 49035-178-08 Compare to Lotrimin Ultra Jock Itch Active Ingredient CONTAINS THE DRUG: BUTENAFINE HYDROCHLORIDE Butenafine Hydrochloride Cream 1% Antifungal Clinically Proven To Cure Most Jock Itch
+• Prescription Strength
+• Relieves Itching,Burning and Chafing NET WT 0.42 OZ (12 g) $29 ថ្នាំជួយបំបាត់រមាស់,ប្រេះក្រហែង ដៃជើង,រលាក់ស្នាម..USA ប្រើសំរាប់តែអ្នកមាន បញ្ហាចាប់ពីអាយុ12ឆ្នាំឡើង+",n:true,"image":"https://ibb.co/5WcD9yQf"},
+  {id:24,name:"Eye Drops Redness & Dry Relief",brand:"Equate",e:"👁️",price:29,cat:"wellness",desc:"equateTM REDNESS AND DRY EYE RELIEF
+Compare to Clear Eyes active Ingredients Eye Drops Glycerin 0.25% Lubricant Naphazoline HCI 0.012% Redness Reliever• Soothes & Protects • Sterile O.5 FL OZ (15 mL) ថ្នាំបន្តក់ភ្នែកក្រហមស្ងួត USA $29
+ប្រើសំរាប់តែអ្នកមាន បញ្ហាភ្នែកក្រហម ស្ងាត បន្តក់1 ថ្ងៃ 4 ដងបាន",n:true,"image":"https://ibb.co/RGt6MF2Z"},
+  {id:25,name:"Gas Relief Extra Strength 125mg",brand:"Equate",e:"💊",price:29,cat:"wellness",desc:"Gas Relief ថ្នាំសំរាប់ហើមពោះ មិនដើរខ្យល់ ពិបាកក្នុងខ្លួន USA $29 មាន72 គ្រាប់ ញាំ 1 ថ្ងៃ 1 គ្រាប់ពេល មានបញ្ហាឈឺខាងលើ
+equateTM EXTRA STRENGTH NDC 49035-266-72 Compare to Gas-X® Extra Strength active ingredient Gas Relief Antigas/Simethicone 125 mg Small, Easy To Swallow Fast Relief of:Pressure Bloating ⚫Discomfort Actual Size 125 72mg SOFTGELS TAMPER EVIDENT: DO NOT USE IF PRINTED SAFETY SEAL AROUND BOTTLE OR UNDER CAP IS BROKEN OR MISSING.Drug Facts",n:true,"image":"https://ibb.co/PzFkyh5F"},
+  {id:26,name:"Melatonin 10mg Sleep Support",brand:"Spring Valley",e:"😴",price:32,cat:"wellness",desc:"THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FOOD AND DRUG ADMINISTRATION. THIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE.
+SPRING VALLEY.FAST DISSOLVE Melatonin PER 10 mg SERVING DIETARY SUPPLEMENT
+SLEEP SUPPORT* Helps establish normal sleep patterns. Helps you get better sleep so you wake up refreshed."Fall asleep faster, stay asleep longer.120 TABLETS Artificial Strawberry Flavor
+វីតាមីនជំនួយគេង USA $32 មាន120គ្រាប់ ញាំមួយថ្ងៃ1គ្រាប់ ពេលបាយហើយមុនចូលគេង 10mg",n:true,"image":"https://ibb.co/RGtZ01m8"},
+  {id:27,name:"Prostate Support 90 Capsules",brand:"DreamZone",e:"🔵",price:34,cat:"wellness",desc:"ទទួលស្គាល់ពី FORMULATED PROSTATE SUPPORT
+វីតាមីនជួយក្រពេញប្រូស្តាត
+អត្ថប្រយោជន៏
+- នោមខ្សោយ -រាន់នោម
+-នោមយូរ
+- នោមញឹក - នោមមិនអស់ - នោមលើកយ «ខ្សោយផ្លូវភេទ លិង្គមិនឡើងរឹង • មានឈាមលាយជាមួយទឹកនោម -បណ្ដាលឱ្យកើតមហារីកក្រពេញប្រឃ្លាតធ្ងន់ធ្ង 1កំប៉ុងចំនួន90គ្រាប់លេបបានរយៈពេល១ខែ​​ 34$១ កំប៉ុង
+DreamZone​ PROSTATE SUPPORT Support For Men Helps Support Male Function 90 CAPSULES FDA FRON GMP",n:true,"image":"https://ibb.co/RpkcT4f4"},
+  {id:28,name:"CoQ10 300mg Heart Health",brand:"Spring Valley",e:"❤️",price:34,cat:"vitamin",desc:"THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FOOD AND DRUG ADMINISTRATION. THIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE.SPRING VALLEY.RAPID-RELEASE CoQ10 PER 300 mg SOFTGEL
+DIETARY SUPPLEMENT HEART HEALTH* Supports cellular energy production and cardiovascular health 60 SOFTGELS CoQ10 ជំនួយបេះដូង នឹង កម្លាំងUSA $34 មាន60 គ្រាប់ ញាំ 1 ថ្ងៃ 1 គ្រាប់ពេល បាយហើយ",n:true,"image":"https://ibb.co/ymZVyvgx"},
+  {id:29,name:"Starbucks Breakfast Blend Coffee",brand:"Starbucks",e:"☕",price:39,cat:"tea",desc:"GROUND
+STARBUCKS® BREAKFAST BLEND NOTES OF BROWN SUGAR]& SWEET ORANGE MEDIUM ROAST LIGHTEST DARKEST $39
+miuSTARBUCKS មាន340G ឆុងបាន 34កែវដោយ1កែវដាក់កាហ្វេ 10G 180 ML THE TASTE 1202 OF FRESHNESS",n:true},
+  {id:30,name:"Starbucks Caffè Verona Coffee",brand:"Starbucks",e:"☕",price:39,cat:"tea",desc:"GROUND
+STARBUCKS® CAFFÈ VERONAR® NOTES OF DARK COCOA & CARAMELIZED SUGAR DARK ROAST LIGHTEST DARKEST 12 OZ
+$39 miuSTARBUCKS មាន340G ឆុងបាន 34កែវដោយ1កែវដាក់កាហ្វេ 10GS 180 ML INGREDIENTS Ground Arabica Coffee",n:true,"image":"https://ibb.co/tTrkcsLn"},
+  {id:31,name:"Salonpas Pain Relieving Patch",brand:"Hisamitsu",e:"🩹",price:19,cat:"pain",desc:"OTC topical analgesics in patch category WORLD'S BRAND NO.Hisamitsu NDC#46581-210-06 for temporary relief of minor aches & pains BACKACHE SORE SHOULDER STIFF NECK JOINT PAIN Salonpas Pain Relieving Patch LARGE
+កៅអៀកជួយបាត់ ឈឺខ្នង ស្មា ក ចង្កេះ ជប៉ុន 19$ មាន6 បន្ទះ ហែកបិទ លើកន្លែងឈឺចុកចាប់ Pain Relieving Patch
+1.81" (4.6 cm) APPLY FOR 86 PATCHES 5.67"X3.62" (14.4cmx9.2cm) MADE IN JAPAN 2.83" (7.2 cm)",n:true,"image":"https://ibb.co/Qjmr2dT6"},
+  {id:32,name:"Keto Chocolate Trail Mix",brand:"Great Value",e:"🥜",price:24,cat:"tea",desc:"គ្រាប់ធញ្ញជាតិពិសេស សំរាប់អាហារសម្រន់សម្បូរ ប្រូតេអ៊ីន
+Great​ Value Keto Chocolate Trail Mix with Almonds, Peanuts, Walnuts, Pepitas and Semi-Sweet Chocolate Chunks Great Value 8 POUCHES Kato Chocolate Trail Mix Keto Chocolate ail Mix $24 មាន8 កញ្ចប់ ក្នុង1 ប្រអប់
+Great Value.Keto Chocolate Trail Mix 4th Almonds, Fran Sen Seat Co Serving suggestion enlarged to show texture NET WT 1.5 OZ (43g) D serving suggestion enlarged to show texture 8-1.5 OZ POUCHES NET WT 12 OZ (340g) D NET WT 150M",n:true,"image":"https://ibb.co/PGtn2h51"},
+  {id:33,name:"Prosacea Rosacea Gel",brand:"Prosacea",e:"🌸",price:34,cat:"skin",desc:"ROSALE
+808 CONTROL REDNESS AND IRRITATION DERMATOLOGIST RECOMMENDED PROSACEA ROSACEA GEL HEALS ROSACEA
+SYMPTOMS:
+• REDNESS
+• IRRITATION
+VISIBLE RESULTS IN DAYS Medicated Homeopathic Topical Gel
+គ្រីមព្យាបាល ជំងឺស្បែកមុខក្រហមស្នាមក្រហម និងការរលាក ស្បែក
+DERMATOLOGIST RECOMMENDED PROSACEA ROSACEA GEL Medic Topical Ge USA $34 លាបលើស្បែកថ្នមៗមួយថ្ងៃម្តង
+CaŁ PROSACEA USERS. បន្ទាប់ហើយអាច2ដងក្នុងមួយថ្ងៃ Real VISIBLE RESULTS.
+ឃើញលទ្ធផលរហ័សសះស្បើយ ប្រើចាប់ពីអាយុ18ឆ្នាំឡើងលើ គ្មានជាតិប្រេង គ្មានជាតិអាល់កុល គ្មានសារធាតុ ក្រអូប
+និងមិនបង្កឱ្យកើតមុន (មិនធ្វើឱ្យស្ទះរន្ធញើស)",n:true,"image":"https://ibb.co/7J8qTg7Y"},
+  {id:34,name:"Gold Bond Eczema Hand Cream",brand:"Gold Bond",e:"🤲",price:20,cat:"skin",desc:"GOLD BOND
+NEW LOOK MEDICATED 7 MOISTURIZERS + 3 VITAMINS ECZEMA RELIEF HAND CREAM COLLOIDAL OATMEAL 2% Skin Protectant 8OUT 10 OF ECZEMA SUFFERERS HAD SIGNIFICANT SYMPTOM RELIEF Net wt 3 oz Eczem ASSOCIATI
+គ្រីមលាបដៃ ស្ងួត រមាស់ ក្រហម USA $20 លាបដៃស្ងួត រមាស់ ក្រហម 8 OF 10 ECZEMA SUFFERERS EXPERIENCED SIGNIFICANT SYMPTOM RELIEF*"Data on file",n:true,"image":"https://ibb.co/Qj1MKRkV"},
+  {id:35,name:"Scar Gel Skin Care 50g",brand:"Equate",e:"🧴",price:34,cat:"skin",desc:"NDC 49035-838-17
+equate Compare to Mederma® Advanced Formula Scar Gel Active Ingredient Scar Gel Skin Care for Scars
+Use daily to help reduce appearance of old & new scars from surgery, injury, acne or stretch marks
+• Allantoin Skin Protectant គ្រីមលាបបំបាត់ ស្លាកស្នាមUSA $34 លាប1ដងក្នុងមួយថ្ងៃលាបថ្នមៗ
+Made in the USA Factory Certified NET WT 1.76 OZ (50g)",n:true,"image":"https://ibb.co/276FKFWP"},
+  {id:36,name:"NIVEA Creme Germany 30ml",brand:"NIVEA",e:"💙",price:10,cat:"skin",desc:"NIVEA Germany Creme $10 គ្រីម គ្រឹម លាប មុខ ខ្លួន ដៃ ផលិតផលប្រទេស អាលឺម្មង់ ប្រើបានទាំងប្រុស នារី ស្បែកមុខ រលោង ភ្លឺ ស្អាត
+NET WT. 1 oz 29g. 30mL",n:true,"image":"https://ibb.co/JRCGWDLs"},
+  {id:37,name:"PMS Tea for Women",brand:"Prince of Peace",e:"🌸",price:28,cat:"tea",desc:"PMS
+Princece 太子牌 PMS(for women)舒經茶 Support and Balance a Healthy Menstrual cycle Dietary Supplement
+Herbal Tea All Natural NET WT 18 TEA BAGS x 1.8g (1.14oz / 32.4g)
+តែផឹកUSA ជួយវដ្តរដូវ ស្រ្តីឲ្យទៀងទាត់សុខភាពល្អ $28 មាន18កញ្ចប់ឆុង ញាំមួយថ្ងៃ1កញ្ចប់ ជាមួយទឹកក្តៅ",n:true,"image":"https://ibb.co/Mx72dCQv"},
+  {id:38,name:"Blood Sugar Balance Tea",brand:"Prince of Peace",e:"🌿",price:28,cat:"tea",desc:"NET WT
+Blood Sugar Prince of Peace 太子牌 Blood Sugar 血糖茶 Helps blood Sugar balance & cleansing
+Dietary Supplement Herbal Tea All Natural 18 TEA BAGS x 1.8g (1.14oz / 32.4g)
+តែផឹកUSA ជួយសម្រាប់ អ្នកលើសជាតិស្ករ ក្នុងឈាម 28$ មួយថ្ងៃញាំ 1 កញ្ចប់ឆុង ជាមួយទឹកក្តៅ មាន18 កញ្ចប់",n:true,"image":"https://ibb.co/XxZNgnQc"},
+  {id:39,name:"Blood Pressure Tea",brand:"Prince of Peace",e:"💜",price:28,cat:"tea",desc:"Prince of Peace 太子牌 Blood Pressure Blood 血壓茶 Pressure Dietary Supplement NET WT
+Promotes healthy blood pressure balance*Dietary Supplement                                                Herbal Tea
+All Natural 18 TEA BAGS x 1.8g (1.14oz / 32.4g)
+តែផឹកUSA ជួយសម្រាប់ អ្នក លើសឈាម ជួយឲ្យល្អប្រសើរ 28$
+មួយថ្ងៃញាំ 1 កញ្ចប់ឆុង ជាមួយទឹកក្តៅ មាន18 កញ្ចប់",n:true,"image":"https://ibb.co/N21LCnRn"},
+  {id:40,name:"Yogi Green Tea Blueberry Slim",brand:"Yogi",e:"🍵",price:28,cat:"tea",desc:"Yogi
+Green Tea Blueberry Slim Life
+តែផឹកUSAជួយសម្រាប់អ្នកសម្រកទម្ងន់ឲ្យស្លីមស្អាត
+ENERGIZES AND SUPPORTS A DIETING PROGRAM*CONTAINS CAFFEINE HERBAL SUPPLEMENT
+16 TEA BAGS NET WT 1.12 0Z / 32g NON GMO USDA Project ORGANIC VERIFIED nongmoproject.org
+28$ មួយថ្ងៃញាំ 1 កញ្ចប់ឆុង ជាមួយទឹកក្តៅ មាន16 កញ្ចប់",n:true,"image":"https://ibb.co/ZRt2VVd8"},
+  {id:41,name:"Nitric Oxide Booster 2,250mg",brand:"Nutricost",e:"💪",price:34,cat:"fitness",desc:"nutricostR
+PERFORMANCE NITRIC OXIDE BOOSTER L-ARGININE/L-ARGININE HCI/ARGININE AKG 21/ L-CITRULLINE/L-CITRULLINE MALATE 2:1 2,250MG 90| 30 PER SERVING 90 CAPSULES DIETARY SUPPLEMENT CAPSULES SERVINGS
+វីតាមីនជួយបំប៉ន ឡើងសាច់ដុំ សំរាប់ អ្នកហាត់ប្រាណ USA 34$ មាន90 គ្រាប់ញាំមួយថ្ងៃ 3គ្រាប់ពេលបាយហើយ",n:true,"image":"https://ibb.co/DfXHJ95H"},
+  {id:42,name:"Lutein 6mg Eye Health",brand:"Spring Valley",e:"👁️",price:34,cat:"vitamin",desc:"THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FOOD HIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE.AND DRUG ADMINISTRATION " THIS TSPRING Lutein VALLEY.6 mg and healthy vision" Supports eye health EYE HEALTH*DIETARY SUPPLEMENT with Zeaxanthin 30 SOFTGELS
+សុខភាពភ្នែក វីតាមីនជួយ $34 USA ចាប់ពីអាយុ18ឆ្នាំឡើង 1ថ្ងៃ 1គ្រាប់បាយហើយ មាន30គ្រាប់ញាំ",n:true,"image":"https://ibb.co/NnfHGyRn"},
+  {id:43,name:"Blood Pressure Support Capsules",brand:"Spring Valley",e:"❤️",price:39,cat:"vitamin",desc:"THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FOOD AND DRUG ADMINISTRATION THIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE SPRING VALLEY.Blood Pressure Support*DIETARY SUPPLEMENT CLINICALLY STUDIED MegaNatural-BPTM HEART HEALTH* Helps maintain blood pressure already within the healthy range.60 VEGETARIAN CAPSULES A
+វីតាមីនជួយ អ្នកលើសឈាមឲ្យ ប្រសើរល្អវិញ USA $39 ជួយសុខភាពបេះដូង មាន60 គ្រាប់ញាំមួយ ថ្ងៃ1 គ្រាប់ពេលបាយហើយ",n:true,"image":"https://ibb.co/5gtVXfY2"},
+  {id:44,name:"Apple Cider Vinegar 1877mg",brand:"Bragg",e:"🍎",price:34,cat:"vitamin",desc:"វីតាមីនជំនួយសម្រកគីឡូ ជួយរក្សារស្ករក្នុងឈាមមាន លំនឹង & $34 មាន90គ្រាប់ ញាំមួយថ្ងៃ3គ្រាប់ ពេលបាយហើយ មុនពេលចូលគេង CHOLESTEROL USA BRAGG EST. 1912
+APPLE CIDER VINEGAR 1877 MG ACV BLEND 1 750 MG ACETIC ACID PER 3 CAPSULES MAINTAINS HEALTHY:
+WGHT BLOOD GLUCOSE CHOLESTEROL I LEVILS 50 CAPSULES I DIETARY SUPPLEMENT",n:true,"image":"https://ibb.co/xdZ6Mm0"},
+  {id:45,name:"Hair Growth Accelerator",brand:"Force Factor",e:"💆",price:59,cat:"vitamin",desc:"RESULTS STARTING IN 3 WEEKS!** FORCE FACTOR HAIR GROWTH ACCELERATOR WITH LUSTRIVA +CLINICAL STRENGTH NUTRIENT FORTIFIED SUPPORTS THE 4 STAGES OF HAIR GROWTH PROMOTE Thicker & Fuller Hair SUPPORT Hair Growth NOURISH Stronger & Healthier Hair 90 Vegetable Capsules DIETARY SUPP វីតាមីនបណ្តុះសក់ FACTOR HAIR GROWTH ACCELERATOR® WITH LUSTRIVA+CLINICAL STRENGTH NUTRIENT FORTIFIED SUPPORTS THE 4STAGES OF HAIR GROWTH
+90 vite per DIETARY SUPPLEMENT RESULTS 3 WEEKS USA $59 មាន90 គ្រាប់ ញាំមួយថ្ងៃ3គ្រាប់ ពេលបាយហើយ ធ្វើឲ្យសក់មាន សុខភាពល្អ",n:true,"image":"https://ibb.co/bgMjKCBD"},
+  {id:46,name:"Testosterone Booster",brand:"Six Star",e:"🏋️",price:34,cat:"fitness",desc:"ING BAND AMERICA'S#1 SELLING SPORTS NUTRITION BRANDTM SIXSTAR CLINICALLY STUDIED INGREDENS TESTOSTERONE BOOSTER RESULTS IN 7 DAYS 385MG RHODIOLA EXTRACT Per Serving 100MG BORON CITRATE Per Serving 60 CAPLETS DIETARY SUPPLEMENT SPORTE
+វីតាមីន ប៉ូវកំលាំង សំរាប់អ្នកហាត់ ឡើងសាច់ដុំ USA $34 មាន60គ្រាប់ញាំ2ដងក្នុង1ថ្ងៃ ព្រឹក1 ល្ងាច1 ជាមួយទឹកមួយពែងពេញ ប្រើបានចាប់អាយុ18ឆ្នាំឡើង",n:true,"image":"https://ibb.co/1tdWRSYD"},
+  {id:47,name:"TheraBreath Fresh Breath Gum",brand:"TheraBreath",e:"🌬️",price:28,cat:"dental",desc:"Thera Breath FRESH BREATH LONG LASTING FRESHNESS SUGAR FREE CRUNCHY SHELL SOFT INSIDE CHEWING GUM INVIGORATING ICY MINT FLAVOR
+វីតាមីនបំបាត់ក្លិន មាត់ស្អុយចេញពីខាងក្នុងខ្លួនយើង USA Dr. Hardd Kate 3 PACK (24 PIECES) TheraBreath FRESH BREATH LONG LASTING FRESHNESS CHEWING GUM -8ct SUGAR FREE INVIGORATING ICY MINT FLAVOR 28$ មាន24 គ្រាប់ ទំពារញាំ លេងមួយថ្ងៃ1 គ្រាប់",n:true,"image":"https://ibb.co/9SFg47V"},
+  {id:48,name:"Flintstones Children's Vitamins",brand:"Bayer",e:"🦕",price:29,cat:"vitamin",desc:"BAYER CHILDREN'S VITAMIN BRAND PEDIA RICIAN RECOMMEN DED FLINTSTONES• SUGAR NO HIGH FRUCTOSE CORN SYRUP by the Food and Drug Administration.This statement has not been evaagnose, treat, cure, or prevent any disease.This product is not intended to COMPLETE SUPPORTS BONE HEALTH with Calcium & Vitamin D* DIETARY SUPPLEMENT 90 CHEWABLE TABLETS វីតាមីនពន្លូត កំពស់ USA $29 មាន១០គ្រាប់ ក្មេងចាប់ពីអាយុ2ឆ្នាំ ទៅ3ឆ្នាំអាចញាំកន្លះគ្រាប់ ក្នុង1ថ្ងៃពេលបាយហើយ ចាប់ពី4ឆ្នាំទៅញាំ1គ្រាប់ រាល់ថ្ងៃពេលញាំបាយហើយ",n:true,"image":"https://ibb.co/60csnGck"},
+  {id:49,name:"One Daily Men's Multivitamin",brand:"Equate",e:"👨",price:26,cat:"vitamin",desc:"the Foodstatemous nove not been evaluated ended to This​ product is not and Drug treat, cure, or prevent any disea​ asoubesp equateTM One Daily MEN'S Multivitamin/Multimineral Supplement No artificial colors Compare to One A Day With key nutrients for 6 health benefits: • Energy levels* • Heart health" • Immune health • Muscle health• Cellular health⚫ Blood pressure levels already within the normal range Men's 100 TABLETS វីតាមីនសំរាប់ បុរស ញ៉ាំរាល់ថ្ងៃ USA $26 ញាំ1ថ្ងៃ1គ្រាប់បាយហើយ",n:true,"image":"https://ibb.co/fVFq1Vkd"},
+  {id:50,name:"Vitamin E 400IU 180mg",brand:"Spring Valley",e:"🌻",price:28,cat:"vitamin",desc:"THESE STATEMENTS HAVE NOT BEEN EVALUATED BY THE FOOD AND DRUG ADMINISTRATION. THIS PRODUCT IS NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE.SPRING VALLEY.E 180 mg (400 IU) PER VITAMIN SUPPLEMENT HEART HEALTH* Vitamin E is a potent antioxidant that supports heart and immune health.100 SOFTGELS
+វីតាមីន E ជួយស្បែក នឹង បេះដូងUSA $28 មាន100គ្រាប់ញាំ 1ថ្ងៃ 1គ្រាប់បាយហើយចាប់ពីអាយុ18ឆ្នាំឡើង",n:true,"image":"https://ibb.co/gF9KVN7W"},
+  {id:51,name:"Milk Thistle 175mg Liver",brand:"Spring Valley",e:"🌾",price:34,cat:"vitamin",desc:"SPRING VALLEY. STANDARDIZED EXTRACT Milk Thistle 175 mg PER CAPSULE DIETARY SUPPLEMENT HERBAL SUPPLEMENT 90 CAPSULES វីតាមីនព្យាបាល ថ្លើម USA $34 ជួយថ្លើម បេះដូង ទឹកនោមផ្អែមឲ្យប្រសើរ មាន90គ្រាប់ញាំមួយថ្ងៃ1គ្រាប់ បាយហើយ",n:true,"image":"https://ibb.co/7FFnKFL"},
+  {id:52,name:"One Daily Women's Multivitamin",brand:"Equate",e:"👩",price:26,cat:"vitamin",desc:"PLASTIC BOTTLE These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.equate One Daily WOMEN'S Compare to
+One A Day Women'st Multivitamin/Multimineral Supplement No artificial colors With key nutrients for 6 health benefits: • Heart health• Immune health Bone health* Hair, skin & nails health* Muscle health* Energy levels 100 TABLETS វីតាមីនសំរាប់ នារី ញាំរាល់ថ្ងៃ USA $26 ញាំ1ថ្ងៃ1គ្រាប់បាយហើយ",n:true,"image":"https://ibb.co/60HsKVTK"},
+  {id:53,name:"Olay Brightening Exfoliating Cleanser",brand:"OLAY",e:"🌟",price:30,cat:"skin",desc:"OLAY BRIGHTENING EXFOLIATING CLEANSER with VITAMIN C For Dull, Tired Skin 150 mL (5.0 FL OZ) ស្តាប់ខាត់លាង សម្អាតស្បែក ឲ្យភ្លឺរលោងUSA OLAY $30 លុបមុខឲ្យសើម រួចម៉ាស្សាថ្នមៗជា មួយស្ដាប់រួចលាងទឹកចេញ",n:true,"image":"https://ibb.co/j94Tr6sJ"},
+  {id:54,name:"Neutrogena Ultra Sheer Sunscreen SPF55",brand:"Neutrogena",e:"☀️",price:30,cat:"skin",desc:"Neutrogena DERMATOLOGIST RECOMMENDED BRAND ULTRA SHEERR Dry-Touch Sunscreen 55 BROAD SPECTRUM SPF 55 Antioxidant Vitamin E Lightweight clean feel Shields skin 6 layers deep with HELIOPLEX® Water resistant (80 minutes) 3.0 FL OZ (88 mL) ឡេលាបការពារ កំដៅថ្ងៃSPF 55 Sunscreen USA $30 លាបមុខ លាបដៃ ខ្លួន ប្រាណ លាបមុន15 នាទីម្នាចេញត្រូវ កំដៅថ្ងៃ",n:true,"image":"https://ibb.co/FbnWmfH2"},
+  {id:55,name:"Cetaphil Moisturizing Lotion 2oz",brand:"Cetaphil",e:"💚",price:14,cat:"skin",desc:"Cetaphil ឡេ លាបមុខ លាប ខ្លួន USA $14
+Moisturizing Lotion Normal to Dry Skin 2 FL OZ ERMATOLOGIS SENSITIVE SKIN RECOMMENDED
+ធ្វើឲ្យស្បែកទន់រលោង ភ្លឺស្អាតគយគន់ Dermatologist Recommended for Sensitive Skin C",n:true,"image":"https://ibb.co/LdGmmkVc"},
+  {id:56,name:"Olay Active Hydrating Night Cream",brand:"OLAY",e:"🌙",price:30,cat:"skin",desc:"OLAY ACTIVE HYDRATING FIRMING NIGHT CREAM 48 hours of nourishing moisture Deeply replenishes 2 oz while you rest for firmer, more resilient skin ឡេលាបមុខ សំរាប់យប់ ផ្តល់សំណើម OLAY USA $30 លាបមុខ នឹង ក រាល់ពេលមុនចូលគេង ផ្តល់សំណើមបានល្អ បាត់ជ្រាវជ្រួញ",n:true,"image":"https://ibb.co/sdGNVttG"},
+  {id:57,name:"L'Oreal Hydra Renewal Moisturizer",brand:"L'Oréal Paris",e:"🌺",price:39,cat:"skin",desc:"L'ORÉAL PARIS HYDRA RENEWAL MOISTURIZER/HYDRATANT ឡេលាបមុខឲ្យ ស្បែកមានសំណើម រាល់ថ្ងៃ LOREAL PARIS $39 L'ORÉAL NEW LOOK PARIS HYDRA RENEWAL CONTINUOUS MOISTURE
+CREAM All day hydration for dry/sensitive skin PRO-VITAMIN B5 NET WT 170Z (489)
+លាបពេល ព្រឹក និងពេលល្ងាចបានរាល់ថ្ងៃ 48g",n:true,"image":"https://ibb.co/qMjGC72X"},
+];
+ 
+let cp=null,qty=1,cc='all';
+ 
+function rp(list){
+  const g=document.getElementById('pg');
+  const nr=document.getElementById('nr');
+  const cl=document.getElementById('cl');
+  cl.textContent='('+list.length+')';
+  if(!list.length){g.innerHTML='';nr.classList.remove('hidden');return;}
+  nr.classList.add('hidden');
+  g.innerHTML=list.map(p=>`
+    <div class="pcard" onclick="om(${p.id})">
+      <div class="otag">🇺🇸 USA</div>
+      ${p.n?'<div class="ntag">✨ NEW</div>':''}
+      <div class="pimg">${p.e}</div>
+      <div class="pbody">
+        <div class="pbrand">${p.brand}</div>
+        <div class="pname">${p.name}</div>
+        <div class="pdesc">${p.desc}</div>
+        <div class="pfoot">
+          <div class="pprice">$${p.price}</div>
+          <button class="bbtn">🛒 ទិញ</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+ 
+function fc(cat,btn){
+  cc=cat;
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  af();
+}
+ 
+function ds(){af();}
+ 
+function af(){
+  const q=document.getElementById('si').value.toLowerCase();
+  let list=P;
+  if(cc!=='all') list=list.filter(p=>p.cat===cc);
+  if(q) list=list.filter(p=>p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)||p.desc.includes(q));
+  rp(list);
+}
+ 
+function om(id){
+  cp=P.find(p=>p.id===id);
+  qty=1;
+  document.getElementById('mn').textContent=cp.name;
+  document.getElementById('mbr').textContent=cp.brand;
+  document.getElementById('mp').textContent='$'+cp.price;
+  document.getElementById('mic').textContent=cp.e;
+  document.getElementById('md').textContent=cp.desc;
+  document.getElementById('qn').textContent='1';
+  document.getElementById('ta').textContent='$'+cp.price;
+  ['fn','fp','fa','fnt'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('mo').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+ 
+function cmo(e){
+  if(e.target===document.getElementById('mo')) cm();
+}
+function cm(){
+  document.getElementById('mo').classList.remove('open');
+  document.body.style.overflow='';
+}
+ 
+function cq(d){
+  qty=Math.max(1,qty+d);
+  document.getElementById('qn').textContent=qty;
+  document.getElementById('ta').textContent='$'+(cp.price*qty);
+}
+ 
+function so(){
+  const n=document.getElementById('fn').value.trim();
+  const ph=document.getElementById('fp').value.trim();
+  const a=document.getElementById('fa').value.trim();
+  if(!n||!ph||!a){alert('⚠️ សូមបំពេញព័ត៌មានឲ្យបរិបូណ៌!');return;}
+  const nt=document.getElementById('fnt').value.trim();
+  const t=cp.price*qty;
+  const msg=`🛒 ការបញ្ជាទិញថ្មី — LongLife KH!\n\n📦 ផលិតផល: ${cp.name}\n🏷️ ម.ក: ${cp.brand}\n💰 តម្លៃ: $${cp.price} × ${qty} = $${t}\n\n👤 ឈ្មោះ: ${n}\n📞 ទូរស័ព្ទ: ${ph}\n📍 អ.ដ្ឋាន: ${a}${nt?'\n📝 ចំណាំ: '+nt:''}`;
+  window.open('https://t.me/challizz?text='+encodeURIComponent(msg),'_blank');
+  cm();
+  document.getElementById('sov').classList.add('open');
+}
+ 
+function cs(){
+  document.getElementById('sov').classList.remove('open');
+}
+ 
+rp(P);
+</script>
+</body>
+</html>
+ 
